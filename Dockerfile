@@ -21,7 +21,7 @@ ENV CGO_ENABLED=0
 
 RUN apk add -U --no-cache ca-certificates
 RUN apk add -U curl
-RUN curl -s -q https://raw.githubusercontent.com/toodofun/gvm/master/LICENSE -o /go/LICENSE
+RUN curl -s -q https://raw.githubusercontent.com/toodofun/pulse/master/LICENSE -o /go/LICENSE
 RUN go install -v -ldflags "$(go run scripts/gen-ldflags.go)" "github.com/toodofun/pulse@latest"
 
 FROM alpine:3.21
