@@ -1,12 +1,28 @@
+// Copyright 2025 The Toodofun Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http:www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package oauth
 
 import (
 	"context"
 	"fmt"
+
 	"github.com/google/go-github/v61/github"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/oauth2"
-	"pulse/internal/config"
+
+	"github.com/toodofun/pulse/internal/config"
 )
 
 type GithubProvider struct {
@@ -35,7 +51,7 @@ func (p *GithubProvider) GetAuthURL(redirectURL string) string {
 func (p *GithubProvider) GetInfo(code string) (*UserInfo, error) {
 	logrus.Debugf("GetInfo.code: %s", code)
 
-	token, err := p.config.Exchange(oauth2.NoContext, code)
+	token, err := p.config.Exchange(context.TODO(), code)
 	if err != nil {
 		logrus.Errorf("get token failed, error: %v", err)
 		return nil, err

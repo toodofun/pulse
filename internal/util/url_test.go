@@ -12,20 +12,39 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package model
+package util
 
-import (
-	"time"
+import "testing"
 
-	"gorm.io/gorm"
-)
-
-type Record struct {
-	ID           uint64         `json:"id"           gorm:"primary_key;"`
-	ServiceID    string         `json:"serviceId"    gorm:"type:varchar(64);not null;index"`
-	IsSuccess    bool           `json:"isSuccess"    gorm:"not null;index"`
-	ResponseTime int64          `json:"responseTime" gorm:"index"`
-	Message      string         `json:"message"      gorm:"size:1024"`
-	MonitorAt    time.Time      `json:"monitorAt"    gorm:"not null;index"`
-	DeletedAt    gorm.DeletedAt `json:"-"`
+func TestIsURL(t *testing.T) {
+	type args struct {
+		str string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			name: "url s",
+			args: args{
+				str: "http://example.com",
+			},
+			want: true,
+		},
+		{
+			name: "url f",
+			args: args{
+				str: "ahttp://example.com",
+			},
+			want: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := IsURL(tt.args.str); got != tt.want {
+				t.Errorf("IsURL() = %v, want %v", got, tt.want)
+			}
+		})
+	}
 }

@@ -1,4 +1,4 @@
-module pulse
+module github.com/toodofun/pulse
 
 go 1.24
 

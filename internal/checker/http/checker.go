@@ -1,19 +1,35 @@
+// Copyright 2025 The Toodofun Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http:www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package http
 
 import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/mcuadros/go-defaults"
-	"github.com/sirupsen/logrus"
 	"io"
 	"net/http"
 	"net/url"
-	"pulse/internal/model"
-	"pulse/internal/util"
 	"slices"
 	"strings"
 	"time"
+
+	"github.com/mcuadros/go-defaults"
+	"github.com/sirupsen/logrus"
+
+	"github.com/toodofun/pulse/internal/model"
+	"github.com/toodofun/pulse/internal/util"
 )
 
 const (
@@ -26,10 +42,10 @@ type Checker struct {
 type fields struct {
 	URL     string            `json:"url"`
 	Timeout int               `json:"timeout" default:"30"`
-	Code    []int             `json:"code" default:"[200,201,202,204,301,302]"`
+	Code    []int             `json:"code"    default:"[200,201,202,204,301,302]"`
 	Headers map[string]string `json:"headers"`
-	Method  string            `json:"method" default:"GET"`
-	Body    string            `json:"body" default:""`
+	Method  string            `json:"method"  default:"GET"`
+	Body    string            `json:"body"    default:""`
 	Cookies map[string]string `json:"cookies"`
 }
 
