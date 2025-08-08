@@ -15,8 +15,6 @@
 package main
 
 import (
-	"github.com/sirupsen/logrus"
-
 	"github.com/toodofun/pulse/internal/config"
 	"github.com/toodofun/pulse/internal/server"
 )
@@ -26,8 +24,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
-	logrus.Infof("running with config: %+v", config.Current())
 
 	if err = svc.Run(); err != nil {
 		panic(err)

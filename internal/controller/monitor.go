@@ -105,6 +105,22 @@ func (c *MonitorController) handleSetDisable(ctx *gin.Context) {
 	}
 }
 
+func (c *MonitorController) handleSetPrivate(ctx *gin.Context) {
+	if err := c.svc.SetPrivate(ctx.Param("id"), true, GetUser(ctx)); err != nil {
+		Reply(ctx, NewCodeWithMsg(CodeUnknown, err.Error()), nil)
+	} else {
+		Reply(ctx, CodeSuccess, nil)
+	}
+}
+
+func (c *MonitorController) handleSetPublic(ctx *gin.Context) {
+	if err := c.svc.SetPrivate(ctx.Param("id"), false, GetUser(ctx)); err != nil {
+		Reply(ctx, NewCodeWithMsg(CodeUnknown, err.Error()), nil)
+	} else {
+		Reply(ctx, CodeSuccess, nil)
+	}
+}
+
 func (c *MonitorController) handleUpdateService(ctx *gin.Context) {
 	var req model.Service
 	if err := ctx.ShouldBindJSON(&req); err != nil {
@@ -127,6 +143,8 @@ func (c *MonitorController) RegisterRoute(group *gin.RouterGroup) {
 	api.PUT("/:id", c.handleUpdateService)
 	api.PUT("/:id/enable", c.handleSetEnable)
 	api.PUT("/:id/disable", c.handleSetDisable)
+	api.PUT("/:id/private", c.handleSetPrivate)
+	api.PUT("/:id/public", c.handleSetPublic)
 	api.GET("", c.handleListServices)
 	api.POST("", c.handleAddService)
 }

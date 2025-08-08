@@ -215,6 +215,25 @@ func (s *MonitorService) SetEnabled(serviceID string, enabled bool, operator str
 	return nil
 }
 
+func (s *MonitorService) SetPrivate(serviceID string, private bool, operator string) error {
+	var service model.Service
+	if err := s.db.First(&service, "id = ?", serviceID).Error; err != nil {
+		return fmt.Errorf("failed to find service: %w", err)
+	}
+
+	if service.CreatedBy != operator {
+		return fmt.Errorf("no permission")
+	}
+
+	service.Private = private
+
+	if err := s.db.Save(&service).Error; err != nil {
+		return fmt.Errorf("failed to pause service: %w", err)
+	}
+
+	return nil
+}
+
 func (s *MonitorService) GetDailySuccessRatios(serviceID string, operator string, public bool) ([]*model.Ratio, error) {
 	var service model.Service
 	if err := s.db.First(&service, "id = ?", serviceID).Error; err != nil {

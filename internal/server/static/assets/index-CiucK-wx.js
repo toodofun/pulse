@@ -1,0 +1,1 @@
+import{j as e}from"./index-CzvqyFm1.js";const l=({title:s})=>e.jsx("div",{className:"flex items-center gap-2 select-none",children:e.jsx("div",{className:"text-2xl font-bold",children:s})});export{l as P};

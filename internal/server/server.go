@@ -43,6 +43,7 @@ type Server struct {
 var fs embed.FS
 
 func New(cfg *config.Config) (*Server, error) {
+	logrus.Infof("running with config: %+v", config.Current())
 	ctx := context.WithValue(
 		context.Background(),
 		config.ContextKeyInstanceId,

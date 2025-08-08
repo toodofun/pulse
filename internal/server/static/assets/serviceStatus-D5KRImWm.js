@@ -1,0 +1,1 @@
+import{aE as a,aG as i,j as s}from"./index-CzvqyFm1.js";import{a as m}from"./common-5krkRBGx.js";import"./request-CCVLAILL.js";const l=()=>{const{id:t}=a(),[e]=i(),r=e.get("title");return s.jsx("div",{className:"h-full w-full",children:s.jsx(m,{id:t,title:r,fromPublic:!0,embed:!0})})};export{l as ServiceStatus};

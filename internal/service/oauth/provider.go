@@ -29,6 +29,7 @@ var (
 const (
 	AuthTypeGithub = "github"
 	AuthTypeGitlab = "gitlab"
+	AuthTypeFeishu = "feishu"
 )
 
 var (
@@ -74,6 +75,8 @@ func (m *AuthManager) GetAuthProvider(authName string) (Provider, error) {
 		switch conf.AuthType {
 		case AuthTypeGithub:
 			return NewGithubProvider(conf), nil
+		case AuthTypeFeishu:
+			return NewFeishuProvider(conf), nil
 		default:
 			return nil, ErrAuthTypeNotSupport
 		}

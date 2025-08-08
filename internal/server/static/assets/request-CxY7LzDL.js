@@ -1,0 +1,1 @@
+import{k as o}from"./index-CzvqyFm1.js";const l={oauths:()=>o.get("/login/oauth/types"),oauthURL:t=>o.get(`/login/oauth?oauth=${t}`),callback:(t,a,e)=>o.get(`/login/callback?oauth=${t}&code=${a}&state=${e}`)};export{l};
